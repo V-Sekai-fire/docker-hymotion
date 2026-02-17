@@ -41,6 +41,7 @@ services:
     environment:
       HF_TOKEN: ${HF_TOKEN}
       CUDA_VISIBLE_DEVICES: "1"
+      HY_MOTION_DEVICE: "cuda"
       PROMPT_ENGINEERING_BASE_URL: "http://vllm:8000/v1"
       PROMPT_ENGINEERING_MODEL_NAME: "huihui-ai/Huihui-Qwen3-VL-8B-Instruct-abliterated"
     deploy:
