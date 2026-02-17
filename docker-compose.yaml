@@ -14,7 +14,7 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              count: 1
+              count: 2
               capabilities: [compute, utility]
     ports:
       - "8010:8000"
@@ -44,7 +44,7 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              count: 2
+              count: 1
               capabilities: [compute, utility]
     ports:
       - "7870:7860"
