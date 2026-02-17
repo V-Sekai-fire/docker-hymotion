@@ -1,4 +1,4 @@
-# HY-Motion stack: vLLM (Qwen3-VL 8B) + tencent-hy-motion-1-0 Gradio app.
+# HY-Motion stack: vLLM (Text2MotionPrompter) + tencent-hy-motion-1-0 Gradio app.
 # Prompt engineering in HY-Motion uses the in-compose vLLM at http://vllm:8000/v1.
 # Set HF_TOKEN in the environment or in a .env file before running.
 # See run_hymotion.md for prompt-engineering options (e.g. disable via app flags).
@@ -21,9 +21,9 @@ services:
     volumes:
       - "~/.cache/huggingface:/root/.cache/huggingface"
     command: >
-      --model huihui-ai/Huihui-Qwen3-VL-8B-Instruct-abliterated
-      --tensor-parallel-size 1
-      --max-model-len auto
+      --model Text2MotionPrompter/Text2MotionPrompter
+      --tensor-parallel-size 2
+      --max-model-len 8192
       --enable-auto-tool-choice
       --tool-call-parser hermes
       --swap-space 4
@@ -38,13 +38,13 @@ services:
     environment:
       HF_TOKEN: ${HF_TOKEN}
       PROMPT_ENGINEERING_BASE_URL: "http://vllm:8000/v1"
-      PROMPT_ENGINEERING_MODEL_NAME: "huihui-ai/Huihui-Qwen3-VL-8B-Instruct-abliterated"
+      PROMPT_ENGINEERING_MODEL_NAME: "Text2MotionPrompter/Text2MotionPrompter"
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: 1
+              count: 2
               capabilities: [compute, utility]
     ports:
       - "7870:7860"
